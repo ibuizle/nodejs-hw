@@ -3,6 +3,7 @@ import { Note } from '../models/note.js';
 
 export const getAllNotes = async (req, res) => {
   const notes = await Note.find();
+
   res.status(200).json({
     status: 200,
     message: 'Successfully found notes!',
@@ -45,7 +46,11 @@ export const deleteNote = async (req, res) => {
     throw createHttpError(404, 'Note not found');
   }
 
-  res.status(204).send();
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully deleted note!',
+    data: note,
+  });
 };
 
 export const updateNote = async (req, res) => {
